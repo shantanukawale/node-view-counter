@@ -37,7 +37,7 @@ REST.prototype.startServer = function (router) {
         console.log(`All right ! I am alive at Port ${port}.`)
       })
     } catch (err) {
-      console.log(`${logSpanId} :: error in server.js`)
+      console.log(`${logSpanId} :: error ${JSON.stringify(err.toString())}`)
       throw err
     }
   })
