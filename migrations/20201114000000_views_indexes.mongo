@@ -1,0 +1,5 @@
+use node-view-counter
+
+db.views.createIndex({ postId: 1, userId: 1 }, { unique: true, name: "views_composite" })
+db.views.createIndex({ postId: 1 })
+db.views.createIndex({ userId: 1 })
