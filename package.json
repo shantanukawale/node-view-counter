@@ -1,7 +1,7 @@
 {
   "name": "view-counter",
   "version": "1.0.0",
-  "description": "Collection of APIs to keep view count track for anything",
+  "description": "Collection of APIs to keep view count track for posts",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon ./src/server",
