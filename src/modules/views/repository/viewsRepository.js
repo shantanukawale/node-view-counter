@@ -1,15 +1,23 @@
-module.exports = (db) => {
-  const views = db.collection('views')
-  const getViewCountByParams = params => views.count(params)
+const mongo = require('../../../databases/mongo.js')
+module.exports = () => {
 
-  const getViewsByParams = params => views.find(params, { "_id": 0 }).toArray()
+  const getViewCountByParams = async params => {
+    let db = await mongo.get();
+    return db.collection('views').count(params)
+  }
+
+  const getViewsByParams = async params => {
+    let db = await mongo.get();
+    return db.collection('views').find(params, { "_id": 0 }).toArray()
+  }
 
   const addView = async params => {
-    const existingView = await views.count(params)
+    let db = await mongo.get();
+    const existingView =  await db.collection('views').count(params)
 
     // if exists increment viewCount or insert
-    if (existingView)  await views.findOneAndUpdate( params, { $inc: { viewCount: 1 } }, { upsert: true, new: true } )
-    else await views.insert({...params, viewCount: 1 })
+    if (existingView) await db.collection('views').findOneAndUpdate( params, { $inc: { viewCount: 1 } }, { upsert: true, new: true } )
+    else await db.collection('views').insert({...params, viewCount: 1 })
 
     return getViewsByParams(params)
   }
