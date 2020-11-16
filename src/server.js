@@ -3,6 +3,7 @@ const router = express();
 const routes = require('./router');
 const bodyParser = require("body-parser");
 require('dotenv').config();
+const appEventRegistrationService = require('./modules/aws/service/appEventRegistrationService')
 const logSpanId = `server.js`
 
 function REST() {
@@ -21,6 +22,7 @@ REST.prototype.startServer = function (router) {
 
   try {
     router.listen(port, function () {
+      appEventRegistrationService().init()
       console.log(`All right ! I am alive at Port ${port}.`)
     })
   } catch (err) {

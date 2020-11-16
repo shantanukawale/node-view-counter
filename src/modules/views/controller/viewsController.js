@@ -1,6 +1,7 @@
 const { Router } = require('express')
 const logSpanId = 'viewsController'
 const viewsService = require('../service/viewsService')
+
 module.exports = () => {
   const router = Router()
 
@@ -9,7 +10,7 @@ module.exports = () => {
       const result = await viewsService().getViewCountForPostId(req.params.postId)
       res.status(200).json(result)
     } catch (err) {
-      console.log(`${logSpanId} :: error ${err.toString()}`)
+      console.error(`${logSpanId} :: error ${err.toString()}`)
       res.status(500).send(err.toString())
     }
   })
@@ -19,7 +20,7 @@ module.exports = () => {
       const result = await viewsService().getViews(req.query)
       res.status(200).json(result)
     } catch (err) {
-      console.log(`${logSpanId} :: error ${err.toString()}`)
+      console.error(`${logSpanId} :: error ${err.toString()}`)
       res.status(500).json(err.toString())
     }
   })
@@ -29,7 +30,7 @@ module.exports = () => {
       const result = await viewsService().addView(req.body)
       res.status(200).json(result)
     } catch (err) {
-      console.log(`${logSpanId} :: error ${err.toString()}`)
+      console.error(`${logSpanId} :: error ${err.toString()}`)
       res.status(500).json(err.toString())
     }
   })
