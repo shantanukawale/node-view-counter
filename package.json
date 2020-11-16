@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/shantanukawale/node-view-counter#readme",
   "dependencies": {
+    "aws-sdk": "^2.792.0",
+    "cls-hooked": "^4.2.2",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongodb": "^3.6.3"

@@ -1,4 +1,6 @@
 const viewsRepository = require('../repository/viewsRepository')
+const awsService = require('../../aws/service/awsService')
+
 module.exports = () => {
   const getViewCountForPostId = async postId => {
     if (!postId) throw new Error('Missing postId in request body')
@@ -20,13 +22,7 @@ module.exports = () => {
     const { userId, postId } = params
     if (!userId && !postId) throw new Error('Missing userId or postId in request body')
 
-    const views = await viewsRepository().addView(params)
-
-    return {
-      postId,
-      userId,
-      views
-    }
+    awsService().publishEvent('AddView', params)
   }
 
   return  {
